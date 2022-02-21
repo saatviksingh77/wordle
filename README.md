@@ -4,20 +4,15 @@
 
 ### Wordle in Python(Graphics)
 Made using turtle and tkinter libraries.  
-Possible answers and valid word lists fetched from imported JSON files.
+Possible answers and valid word lists fetched from imported JSON files. Randomized answer choice
 
 ### Wordle in Python(text)
 Basic code, no graphics involved. See character meanings [here](#character-meanings)  
-Supports imported word list.
+Supports imported word list. Randomized answer choice
 
 ### Wordle in Java(text)
 Same functionality as wordle in python(text). See character meanings [here](#character-meanings)  
 Currently does not support imported JSON word list, uses fixed answer.
-
-#### Bugs
-- Extra letters not greyed out
-- Blank tkinter root window pop up
-- Text versions lack some necessary checks
 
 #### Character meanings
 **🟩 or \# = correct letter correct position**  
