@@ -17,8 +17,9 @@ Currently does not support imported JSON word list.
 #### Bugs
 - Extra letters not greyed out
 - Blank tkinter root window pop up
+- Text versions lack some necessary checks
 
 #### Character meanings
-**\# = correct letter correct position**  
-**\* = correct letter wrong position**  
-**\- = letter not present**
+**🟩 or \# = correct letter correct position**  
+**🟨 or \* = correct letter wrong position**  
+**⬛ or \- = letter not present**
