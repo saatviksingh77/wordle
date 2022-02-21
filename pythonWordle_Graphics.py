@@ -5,6 +5,7 @@ import json
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
+from collections import Counter
 
 f=open("Wordle\WordLists\wordleWordList.json")
 f2=open("Wordle\WordLists\wordleAnswerList.json")
@@ -76,21 +77,16 @@ initializeGame()
 
 while i<=6:
     guess=turtle.textinput("Guess",f"Enter guess {i}").lower()
+    g_count = Counter(guess)
+    a_count = Counter(answer)
     print(guess)
     validGuess=True
-    for x in guess:
-        if(len(guess)!=5):
-            messagebox.showinfo("Try again", "You must enter a 5 letter word")
-            validGuess=False
-            break
-        elif(ord(x)<97 or ord(x)>122):
-            messagebox.showinfo("Try again", "No characters other than letters allowed")
-            validGuess=False
-            break
-        elif(guess not in wordList):
-            messagebox.showinfo("Try again", "Word not recognized")
-            validGuess=False
-            break
+    if(len(guess)!=5):
+        messagebox.showinfo("Try again", "You must enter a 5 letter word")
+        validGuess=False
+    elif(guess not in wordList):
+        messagebox.showinfo("Try again", "Word not recognized")
+        validGuess=False
     t.goto(-110,200-(50*i))
     txtTurtle.goto(-100,205-(50*i))
     if(validGuess):
@@ -98,7 +94,7 @@ while i<=6:
             if(guess[j]==answer[j]):
                 square(grn)
                 writeLetter()
-            elif(guess[j] in answer):
+            elif(g_count[guess[j]] == a_count[guess[j]]):
                 square(ylw)
                 writeLetter()
             else:
