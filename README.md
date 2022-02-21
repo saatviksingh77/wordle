@@ -12,7 +12,7 @@ Supports imported word list.
 
 ### Wordle in Java(text)
 Same functionality as wordle in python(text). See character meanings [here](#character-meanings)  
-Currently does not support imported JSON word list.
+Currently does not support imported JSON word list, uses fixed answer.
 
 #### Bugs
 - Extra letters not greyed out
