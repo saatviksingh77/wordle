@@ -60,7 +60,6 @@ def writeLetter():
 def initializeGame():
     global i,answer,validGuess
     i=1
-    answer="BOOKS"
     validGuess=True
     answer=random.choice(ansList)
     t.clear()

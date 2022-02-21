@@ -1,11 +1,16 @@
-answer="BOOKS"
+import json, random
+
+f=open("Wordle\WordLists\wordleAnswerList.json")
+ansList=json.load(f)
+answer=random.choice(ansList)
+
 correct=False
 i=1
 
 print("You have 6 chances\n🟩 correct position\n🟨 wrong position\n⬛ not present\n")
 
 while i<=6:
-    guess=input(f"\n\nEnter guess {i}: \n").upper()
+    guess=input(f"\n\nEnter guess {i}: \n").lower()
     if(len(guess)!=5):
         print("Enter 5 letter string")
     else:
