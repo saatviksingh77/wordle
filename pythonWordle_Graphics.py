@@ -55,7 +55,7 @@ def outline():
     t.forward(50)
 
 def writeLetter():
-    txtTurtle.write(guess[j].upper(),font=("Helvetica",20,"bold"))
+    txtTurtle.write(guess[k].upper(),font=("Helvetica",20,"bold"))
     txtTurtle.forward(50)
 
 def initializeGame():
@@ -70,6 +70,24 @@ def initializeGame():
         t.goto(-110,200-(50*x))
         for y in range(5): outline()
     t.speed(10)
+
+def simulate_guess(guess: str, answer: str):
+    result = [0,0,0,0,0]
+    a_count = Counter(answer)
+    left_to_check = []
+    for i in range(5):
+        if guess[i] == answer[i]:
+            result[i] = 2
+            a_count[guess[i]] -= 1
+        else :
+            left_to_check.append(i)
+    for i in left_to_check:
+        if a_count[guess[i]]!= 0:
+            result[i] = 1
+            a_count[guess[i]]-=1
+        else:
+            result[i] = 0
+    return result
 
 ##### function definitions END #####
 
@@ -90,11 +108,12 @@ while i<=6:
     t.goto(-110,200-(50*i))
     txtTurtle.goto(-100,205-(50*i))
     if(validGuess):
-        for j in range(0,5):
-            if(guess[j]==answer[j]):
+        res = simulate_guess(guess,answer)
+        for j,k in zip(res,range(5)):
+            if(j==2):
                 square(grn)
                 writeLetter()
-            elif(g_count[guess[j]] == a_count[guess[j]]):
+            elif(j==1):
                 square(ylw)
                 writeLetter()
             else:
@@ -106,7 +125,7 @@ while i<=6:
         if(playAgain): initializeGame()
         else: sys.exit()
     if(i==7):
-        playAgain=messagebox.askyesno("Uh oh",f"You have used all your tries!\nPlay again?\n\nThe word was: {answer}")
+        playAgain=messagebox.askyesno("Uh oh",f"You have used all your tries!\nPlay again?\n\nThe word was: {answer.upper()}")
         if(playAgain): initializeGame()
         else: sys.exit()
 

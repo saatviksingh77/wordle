@@ -10,30 +10,45 @@ answer=random.choice(ansList)
 correct=False
 i=1
 
+def simulate_guess(guess: str, answer: str):
+    result = [0,0,0,0,0]
+    a_count = Counter(answer)
+    left_to_check = []
+    for i in range(5):
+        if guess[i] == answer[i]:
+            result[i] = 2
+            a_count[guess[i]] -= 1
+        else :
+            left_to_check.append(i)
+    for i in left_to_check:
+        if a_count[guess[i]]!= 0:
+            result[i] = 1
+            a_count[guess[i]]-=1
+        else:
+            result[i] = 0
+    return result
+
 print("You have 6 chances\n🟩 correct position\n🟨 wrong position\n⬛ not present\n")
 
 while i<=6:
     guess=input(f"\n\nEnter guess {i}: \n").lower()
-    g_count = Counter(guess)
-    a_count = Counter(answer)
     if(len(guess)!=5):
         print("Enter 5 letter string")
     elif(guess not in wordList):
         print("Not a valid word")
     else:
-        for j in range(0,5):
-            if(guess==answer):
-                print("Correct")
-                correct=True
-                break
-            elif(guess[j]==answer[j]):
-                print("🟩",end="")
-            elif(g_count[guess[j]] == a_count[guess[j]]):
-                print("🟨",end="")
+        res = simulate_guess(guess,answer)
+        for j in res:
+            if j == 2:
+                print('🟩',end="")
+            elif j == 1:
+                print('🟨',end="")
             else:
-                print("⬛",end="")
+                print('⬛',end="")
+        correct = all(x==2 for x in res)
         i=i+1
     if(correct):
         break
     if(i==7):
         print("\nAll chances over, try again")
+        print(f"Answer = {answer}")
